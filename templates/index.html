@@ -9,48 +9,94 @@
     <style>
         body {
             font-family: 'Roboto', Arial, sans-serif;
-            background-color: #121212;
+            background: linear-gradient(135deg, #1a1a2e, #162447);
             color: #e0e0e0;
-            margin: 20px;
+            margin: 0;
+            padding: 0;
         }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 36px;
+            font-weight: 700;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .contact-info a {
+            color: #00f7ff;
+            text-decoration: none;
+            margin-left: 10px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: #ff5c8d;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
             border: 1px solid #333;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            overflow: hidden;
         }
+
         th, td {
             padding: 15px;
             text-align: left;
         }
+
         th {
-            background-color: #333;
+            background-color: #444;
             color: #fff;
+            font-weight: 600;
         }
+
         tr:nth-child(even) {
             background-color: #2a2a2a;
         }
+
         tr:hover {
             background-color: #444;
         }
-        h1 {
-            color: #fff;
-            margin-bottom: 30px;
-            font-size: 32px;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+
         td, th {
             font-size: 16px;
+        }
+
+        .email-time {
+            font-size: 14px;
+            color: #a9a9a9;
         }
     </style>
 </head>
 <body>
+
     <div class="container">
-        <h1>1最新验证码邮件1</h1>
+        <h1>tiktok接码API</h1>
+        <div class="contact-info">
+            <span>联系方式:</span>
+            <a href="https://t.me/ttc0915" target="_blank">点我联系</a>
+        </div>
+
         <table class="table table-bordered">
             <thead>
                 <tr>
