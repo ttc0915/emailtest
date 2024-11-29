@@ -99,29 +99,19 @@ def get_code(email):
         # 获取验证码邮件数据
         response_data = get_verification_code(email)
         
-        # 检查是否成功获取数据
+        # 提取邮件列表
         if response_data["code"] == 200:
             emails = response_data["data"]["list"]
             
-            # 只取最新的前5条邮件，并且过滤掉无关邮件（例如：没有“验证码”字样的邮件）
+            # 只取最新的前5条邮件
             latest_emails = []
             for email_data in emails[:5]:
-                # 过滤邮件，只保留含有“verification”字样的邮件
-                if "verification" in email_data["subject"].lower():
-                    latest_emails.append({
-                        "recipient": email_data["to"][0]["address"],  # 收件人
-                        "subject": email_data["subject"],              # 标题
-                        "time": email_data["time"]                     # 时间
-                    })
+                latest_emails.append({
+                    "recipient": email_data["to"][0]["address"],  # 收件人
+                    "subject": email_data["subject"],              # 标题
+                    "time": email_data["time"]                     # 时间
+                })
             
-            # 如果没有找到相关邮件，返回提示
-            if not latest_emails:
-                return jsonify({
-                    "status": "error",
-                    "message": "No relevant verification emails found"
-                }), 404
-            
-            # 渲染前端模板并返回最新邮件
             return render_template('index.html', emails=latest_emails)
         else:
             return jsonify({
