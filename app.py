@@ -68,7 +68,7 @@ def get_verification_code(email):
     dataList.append(encode('Content-Disposition: form-data; name=to;'))
     dataList.append(encode('Content-Type: {}'.format('text/plain')))
     dataList.append(encode(''))
-    dataList.append(encode(email))  # 使用动态传入的邮箱
+    dataList.append(encode(email))
 
     # 完成请求的结束标记
     dataList.append(encode('--' + boundary + '--'))
@@ -125,5 +125,5 @@ def get_code(email):
         }), 500
 
 if __name__ == '__main__':
-    port = int(os.getenv("PORT", 5000))  # 获取 Railway 平台提供的端口，默认是 5000
-    app.run(host='0.0.0.0', port=port)  # 监听所有 IP 地址
+    # 启动 Flask 应用，确保监听所有外部请求
+    app.run(host='0.0.0.0', port=int(os.getenv("PORT", 5000)))  # Railway 会自动设置环境变量 PORT
