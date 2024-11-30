@@ -109,15 +109,65 @@
             font-size: 16px;
             color: #ffb3cc;
         }
+
+        /* 响应式设计：适配不同设备尺寸 */
+        @media (max-width: 767px) {
+            h1 {
+                font-size: 40px;
+            }
+
+            .contact-info {
+                font-size: 18px;
+                flex-direction: column;
+            }
+
+            .contact-info span {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            .contact-info a {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+
+            table th, table td {
+                font-size: 16px;
+                padding: 12px;
+            }
+
+            .email-time {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 30px;
+            }
+
+            .contact-info {
+                font-size: 16px;
+            }
+
+            table th, table td {
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            .email-time {
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>tiktok API接码</h1>
+        <h1>最新验证码邮件列表</h1>
         <div class="contact-info">
-            <span>有问题请告诉我</span>
-            <a href="https://t.me/ttc0915">联系方式</a>
+            <span>想要更多帮助？</span>
+            <a href="mailto:support@example.com">联系支持</a>
         </div>
 
         <table class="table table-hover">
