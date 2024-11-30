@@ -143,13 +143,18 @@
     <script>
         // JavaScript 处理时间格式化
         function formatDateTime(datetimeString) {
-            // 检查并替换日期格式的 "-" 为 "/"
-            const formattedDate = datetimeString.replace(/-/g, '/');
+            // 确保时间字符串符合 ISO 8601 格式
+            let formattedDate = datetimeString.replace(/-/g, '/');
 
-            // 尝试解析日期字符串
+            // 处理可能的时间格式问题，确保 iOS 兼容
+            if (formattedDate.length === 10) {
+                formattedDate += ' 00:00:00';  // 补充时分秒部分
+            }
+
+            // 使用严格的解析方式处理日期
             const date = new Date(formattedDate);
 
-            // 如果无法解析日期，则返回 "Invalid Date"
+            // 如果日期无效，返回 'Invalid Date'
             if (isNaN(date)) {
                 console.error('Invalid date:', formattedDate);
                 return 'Invalid Date';
