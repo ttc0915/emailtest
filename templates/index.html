@@ -141,10 +141,10 @@
     </div>
 
     <script>
-        // 去除时区部分，确保日期格式清晰
+        // 去除两个时区部分 +0000
         function removeTimezone(dateString) {
-            // 使用正则表达式去掉时间字符串中的时区部分
-            return dateString.replace(/([+-]\d{4})$/, '');
+            // 使用正则表达式去掉两个时区部分
+            return dateString.replace(/\+0000/g, '').trim();
         }
 
         // 遍历页面上的每个时间字段，去掉时区信息
