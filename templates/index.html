@@ -143,17 +143,25 @@
     </div>
 
     <script>
-        // 使用 moment.js 解析并格式化时间
+        // 使用 moment.js 和 Date.parse() 解析时间
         function formatDateTime(datetimeString) {
-            // 使用 moment.js 自动解析并格式化时间
-            const formattedTime = moment(datetimeString).format('YYYY-MM-DD HH:mm:ss');
+            // 尝试使用 moment.js 来解析日期
+            var formattedTime = moment(datetimeString, moment.ISO_8601, true).isValid() ? moment(datetimeString).format('YYYY-MM-DD HH:mm:ss') : null;
             
-            // 检查是否有效的日期
-            if (moment(datetimeString).isValid()) {
-                return formattedTime;
-            } else {
+            // 如果 moment.js 无法解析，尝试使用 Date.parse() 解析
+            if (!formattedTime) {
+                const parsedTime = Date.parse(datetimeString);
+                if (!isNaN(parsedTime)) {
+                    formattedTime = new Date(parsedTime).toISOString().slice(0, 19).replace("T", " ");
+                }
+            }
+
+            // 如果都无法解析，则返回 "Invalid Date"
+            if (!formattedTime) {
                 return 'Invalid Date';
             }
+
+            return formattedTime;
         }
 
         document.querySelectorAll('.email-time').forEach(function(element) {
