@@ -143,10 +143,13 @@
     <script>
         // JavaScript 处理时间格式化
         function formatDateTime(datetimeString) {
-            // 替换日期中的"-"为"/"来避免iOS兼容性问题
+            // 检查并替换日期格式的 "-" 为 "/"
             const formattedDate = datetimeString.replace(/-/g, '/');
+
+            // 尝试解析日期字符串
             const date = new Date(formattedDate);
 
+            // 如果无法解析日期，则返回 "Invalid Date"
             if (isNaN(date)) {
                 console.error('Invalid date:', formattedDate);
                 return 'Invalid Date';
@@ -158,9 +161,12 @@
             const hours = String(date.getHours()).padStart(2, '0');
             const minutes = String(date.getMinutes()).padStart(2, '0');
             const seconds = String(date.getSeconds()).padStart(2, '0');
+
+            // 返回格式化后的日期
             return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
         }
 
+        // 遍历所有 .email-time 元素，格式化时间并更新显示
         document.querySelectorAll('.email-time').forEach(function(element) {
             const rawTime = element.getAttribute('data-time');
             element.textContent = formatDateTime(rawTime); // 更新页面中的时间
