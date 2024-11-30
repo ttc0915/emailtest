@@ -133,50 +133,12 @@
                     <tr>
                         <td>{{ email.recipient }}</td>
                         <td>{{ email.subject }}</td>
-                        <td class="email-time" data-time="{{ email.time }}"></td> <!-- 使用 data-time 存储原始时间 -->
+                        <td class="email-time">{{ email.formatted_time }}</td> <!-- 使用服务器端已格式化的时间 -->
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
-
-    <script>
-        // JavaScript 处理时间格式化
-        function formatDateTime(datetimeString) {
-            // 确保时间字符串符合 ISO 8601 格式
-            let formattedDate = datetimeString.replace(/-/g, '/');
-
-            // 处理可能的时间格式问题，确保 iOS 兼容
-            if (formattedDate.length === 10) {
-                formattedDate += ' 00:00:00';  // 补充时分秒部分
-            }
-
-            // 使用严格的解析方式处理日期
-            const date = new Date(formattedDate);
-
-            // 如果日期无效，返回 'Invalid Date'
-            if (isNaN(date)) {
-                console.error('Invalid date:', formattedDate);
-                return 'Invalid Date';
-            }
-
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const day = String(date.getDate()).padStart(2, '0');
-            const hours = String(date.getHours()).padStart(2, '0');
-            const minutes = String(date.getMinutes()).padStart(2, '0');
-            const seconds = String(date.getSeconds()).padStart(2, '0');
-
-            // 返回格式化后的日期
-            return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-        }
-
-        // 遍历所有 .email-time 元素，格式化时间并更新显示
-        document.querySelectorAll('.email-time').forEach(function(element) {
-            const rawTime = element.getAttribute('data-time');
-            element.textContent = formatDateTime(rawTime); // 更新页面中的时间
-        });
-    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0+dY9nvw2m8yoLw4I6El8L6O1d4YYWlKSMdIkA5L2M4tji3D" crossorigin="anonymous"></script>
 </body>
