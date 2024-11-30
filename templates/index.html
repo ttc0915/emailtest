@@ -43,6 +43,7 @@
             }
         }
 
+        /* 修改 contact-info 的样式，使其背景为黑色 */
         .contact-info {
             display: flex;
             justify-content: center;
@@ -50,6 +51,10 @@
             font-size: 24px;
             margin-bottom: 30px;
             font-weight: 600;
+            background-color: #000;  /* 设置黑色背景 */
+            color: #fff;  /* 设置文字颜色为白色 */
+            padding: 15px;
+            border-radius: 10px;
         }
 
         .contact-info span {
@@ -58,10 +63,10 @@
         }
 
         .contact-info a {
-            color: #f7a0d3;
+            color: #fff; /* 文字颜色为白色 */
             text-decoration: none;
             font-weight: 600;
-            border: 2px solid #f7a0d3;
+            border: 2px solid #fff; /* 边框为白色 */
             border-radius: 10px;
             padding: 12px 24px;
             transition: all 0.3s ease;
@@ -69,8 +74,8 @@
         }
 
         .contact-info a:hover {
-            background-color: #f7a0d3;
-            color: #121212;
+            background-color: #fff; /* 鼠标悬停时背景变白 */
+            color: #000;  /* 鼠标悬停时文字变黑 */
         }
 
         table {
