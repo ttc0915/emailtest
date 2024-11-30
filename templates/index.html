@@ -6,8 +6,6 @@
     <title>验证码邮件列表</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJYFjC7n2vF5dP0P+YpvKJv5Iwbq1k5Yh35Ewl7zTq2p9IFBs5h7c7PSaGgn" crossorigin="anonymous">
-    <!-- 引入 moment.js -->
-    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -135,7 +133,7 @@
                     <tr>
                         <td>{{ email.recipient }}</td>
                         <td>{{ email.subject }}</td>
-                        <td class="email-time" data-time="{{ email.time }}"></td>
+                        <td class="email-time" data-time="{{ email.time }}"></td> <!-- 使用 data-time 存储原始时间 -->
                     </tr>
                 {% endfor %}
             </tbody>
@@ -143,31 +141,30 @@
     </div>
 
     <script>
-        // 使用 moment.js 和 Date.parse() 解析时间
+        // JavaScript 处理时间格式化
         function formatDateTime(datetimeString) {
-            let formattedTime = '';
-            // 尝试使用 moment.js 来解析日期
-            if (moment(datetimeString, moment.ISO_8601, true).isValid()) {
-                formattedTime = moment(datetimeString).format('YYYY-MM-DD HH:mm:ss');
-            } else {
-                // 如果 moment.js 无法解析，则使用 Date.parse() 进行解析
-                const parsedTime = Date.parse(datetimeString);
-                if (!isNaN(parsedTime)) {
-                    formattedTime = new Date(parsedTime).toISOString().slice(0, 19).replace("T", " ");
-                }
+            const date = new Date(datetimeString);
+
+            // 检查日期是否有效
+            if (isNaN(date)) {
+                return '无效的日期'; // 如果日期无效，返回错误信息
             }
 
-            // 如果都无法解析，则返回 "Invalid Date"
-            if (!formattedTime || formattedTime === 'Invalid Date') {
-                formattedTime = '时间格式错误';
-            }
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0'); // 月份从0开始，所以加1
+            const day = String(date.getDate()).padStart(2, '0');
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            const seconds = String(date.getSeconds()).padStart(2, '0');
 
-            return formattedTime;
+            return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
         }
 
+        // 格式化所有邮件时间
         document.querySelectorAll('.email-time').forEach(function(element) {
             const rawTime = element.getAttribute('data-time');
-            element.textContent = formatDateTime(rawTime); // 更新页面中的时间
+            const formattedTime = formatDateTime(rawTime); // 格式化日期
+            element.textContent = formattedTime; // 更新页面中的时间
         });
     </script>
 
