@@ -142,29 +142,41 @@
 
     <script>
         // JavaScript 处理时间格式化
-        function formatDateTime(datetimeString) {
-            const date = new Date(datetimeString);
-
-            // 检查日期是否有效
-            if (isNaN(date)) {
-                return '无效的日期'; // 如果日期无效，返回错误信息
+        function formatDate(date, format) {
+            if (!date) return;
+            if (!format) format = "yyyy-MM-dd";
+            
+            // 替换 '-' 为 '/'，解决iOS Safari日期解析问题
+            if (typeof date === "string") {
+                date = new Date(date.replace(/-/g, "/"));
+            } else if (typeof date === "number") {
+                date = new Date(date);
             }
 
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, '0'); // 月份从0开始，所以加1
-            const day = String(date.getDate()).padStart(2, '0');
-            const hours = String(date.getHours()).padStart(2, '0');
-            const minutes = String(date.getMinutes()).padStart(2, '0');
-            const seconds = String(date.getSeconds()).padStart(2, '0');
+            if (!(date instanceof Date)) return;
 
-            return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+            var dict = {
+                "yyyy": date.getFullYear(),
+                "M": date.getMonth() + 1,
+                "d": date.getDate(),
+                "H": date.getHours(),
+                "m": date.getMinutes(),
+                "s": date.getSeconds(),
+                "MM": ("" + (date.getMonth() + 1)).padStart(2, '0'),
+                "dd": ("" + (date.getDate())).padStart(2, '0'),
+                "HH": ("" + (date.getHours())).padStart(2, '0'),
+                "mm": ("" + (date.getMinutes())).padStart(2, '0'),
+                "ss": ("" + (date.getSeconds())).padStart(2, '0')
+            };
+
+            return format.replace(/(yyyy|MM?|dd?|HH?|ss?|mm?)/g, function () {
+                return dict[arguments[0]];
+            });
         }
 
-        // 格式化所有邮件时间
         document.querySelectorAll('.email-time').forEach(function(element) {
             const rawTime = element.getAttribute('data-time');
-            const formattedTime = formatDateTime(rawTime); // 格式化日期
-            element.textContent = formattedTime; // 更新页面中的时间
+            element.textContent = formatDate(rawTime, 'yyyy-MM-dd HH:mm:ss'); // 更新页面中的时间
         });
     </script>
 
