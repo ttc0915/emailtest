@@ -20,7 +20,7 @@ def get_verification_code(email):
     dataList.append(encode('Content-Disposition: form-data; name=token;'))
     dataList.append(encode('Content-Type: {}'.format('text/plain')))
     dataList.append(encode(''))
-    dataList.append(encode("3b1bfb9ab2ed4e08979c8d552152f7a6"))
+    dataList.append(encode("6153f3883c3b4521a70090d4e4b6e6d0"))
 
     # 添加 folder
     dataList.append(encode('--' + boundary))
