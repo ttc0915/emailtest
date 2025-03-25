@@ -48,7 +48,7 @@ def get_verification_code(email):
     dataList.append(encode('Content-Disposition: form-data; name=end_time;'))
     dataList.append(encode('Content-Type: {}'.format('text/plain')))
     dataList.append(encode(''))
-    dataList.append(encode("2025-03-24"))
+    dataList.append(encode("2025-12-24"))
 
     # 添加 page 和 limit
     dataList.append(encode('--' + boundary))
