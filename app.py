@@ -9,7 +9,7 @@ app = Flask(__name__)
 # 根据提供的邮箱地址获取验证码
 def get_verification_code(email):
     # 创建连接
-    conn = http.client.HTTPSConnection("domain-open-api.cuiqiu.com")
+    conn = http.client.HTTPSConnection("server-1746443945.cuiqiu.vip")
 
     # 构造 multipart/form-data 请求的内容
     dataList = []
